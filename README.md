@@ -75,6 +75,12 @@ This project includes:
 * Automatically fills your ITR File based on your transaction
 * Allows to directly download the PDF.
 
+### **7. GST & Legitimacy Verification**
+
+* Automatically verifies GSTIN from uploaded bills
+* AI-powered "Legitimacy Report" for every transaction
+* Fraud detection indicators (Verified vs Suspicious)
+
 ---
 
 ## 🏗️ Tech Stack
@@ -119,6 +125,20 @@ npm run dev
 ```
 
 Frontend runs at: `http://localhost:5173`
+
+---
+
+## 🔑 Environment Variables (.env)
+
+Create a `.env` file in the `backend/` directory with the following keys:
+
+| Variable | Description |
+| :--- | :--- |
+| `JWT_SECRET_KEY` | Secret key for signing authentication tokens |
+| `PERPLEX_API_x` | Perplexity AI keys for bill data extraction (Supports up to 3) |
+| `API_1` to `API_10` | KnowYourGST keys for verifying merchant GST numbers |
+| `TESSERACT_PATH` | Full path to the `tesseract.exe` binary (Local OCR) |
+| `POPPLER_PATH` | Full path to the poppler `bin` directory (PDF processing) |
 
 ---
 
@@ -167,6 +187,11 @@ Authenticate user.
   "refresh": "<JWT_REFRESH>"
 }
 ```
+
+> [!NOTE]
+> The JWT token includes the following additional claims in its payload:
+> * `email`: The registered email of the user
+> * `name`: The full name (First + Last) of the user
 
 ---
 
