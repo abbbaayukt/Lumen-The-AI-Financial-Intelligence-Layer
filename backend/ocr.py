@@ -2,9 +2,13 @@ import pytesseract
 from PIL import Image
 from pdf2image import convert_from_path
 
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+import os
+from dotenv import load_dotenv
 
-POPPLER_PATH = r"C:\Program Files\poppler\Library\bin"
+load_dotenv()
+
+pytesseract.pytesseract.tesseract_cmd = os.getenv("TESSERACT_PATH", r"C:\Program Files\Tesseract-OCR\tesseract.exe")
+POPPLER_PATH = os.getenv("POPPLER_PATH", r"C:\Program Files\poppler\Library\bin")
 
 def ocr_image(path):
     img = Image.open(path)

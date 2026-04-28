@@ -113,7 +113,7 @@ pip install -r requirements.txt
 flask run
 ```
 
-create .env file with perplexity api and gst checker api
+create .env file with gemini api and gst checker api
 Backend runs at: `http://localhost:5000`
 
 ### **Frontend Setup**
@@ -135,7 +135,7 @@ Create a `.env` file in the `backend/` directory with the following keys:
 | Variable | Description |
 | :--- | :--- |
 | `JWT_SECRET_KEY` | Secret key for signing authentication tokens |
-| `PERPLEX_API_x` | Perplexity AI keys for bill data extraction (Supports up to 3) |
+| `GEMINI_API_KEY_x` | Gemini AI keys for bill data extraction (Supports up to 3) |
 | `API_1` to `API_10` | KnowYourGST keys for verifying merchant GST numbers |
 | `TESSERACT_PATH` | Full path to the `tesseract.exe` binary (Local OCR) |
 | `POPPLER_PATH` | Full path to the poppler `bin` directory (PDF processing) |

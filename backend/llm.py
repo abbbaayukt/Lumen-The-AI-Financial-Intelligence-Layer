@@ -1,37 +1,25 @@
-import os
 import json
 import re
-import requests
-
+import google.generativeai as genai
 
 class LLM:
-    def __init__(self, api_key: str, model="sonar", max_tokens=400):
-        """
-        max_tokens is kept intentionally LOW to save credits (~0.1 per request)
-        """
+    def __init__(self, api_key: str, model="gemini-2.5-flash", max_tokens=1000):
         self.api_key = api_key
         self.model = model
         self.max_tokens = max_tokens
-        self.endpoint = "https://api.perplexity.ai/chat/completions"
+        if self.api_key:
+            genai.configure(api_key=self.api_key)
 
     def _call(self, prompt: str) -> str:
-        payload = {
-            "model": self.model,
-            "messages": [{"role": "user", "content": prompt}],
-            "temperature": 0.1,
-            "max_tokens": self.max_tokens,
-            "return_citations": False
-        }
-
-        headers = {
-            "Authorization": f"Bearer {self.api_key}",
-            "Content-Type": "application/json"
-        }
-
-        resp = requests.post(self.endpoint, json=payload, headers=headers, timeout=15)
-        resp.raise_for_status()
-        content = resp.json()["choices"][0]["message"]["content"]
-        return content.strip()
+        model = genai.GenerativeModel(self.model)
+        response = model.generate_content(
+            prompt,
+            generation_config=genai.types.GenerationConfig(
+                temperature=0.1,
+                max_output_tokens=self.max_tokens,
+            )
+        )
+        return response.text.strip()
 
     def _force_json(self, text: str) -> dict:
         text = text.replace("```json", "").replace("```", "")

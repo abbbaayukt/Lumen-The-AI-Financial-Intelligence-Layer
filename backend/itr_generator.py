@@ -24,22 +24,18 @@ def overlay_page1(data, w, h):
 
     can.setFillColor(colors.black)
 
-    first, middle, last = split_name(data["name"])
+    can.drawString(160, h - 211, data["name"])
 
-    can.drawString(189, h - 446, first)
-    can.drawString(189, h - 475, middle)
-    can.drawString(189, h - 504.7, last)
-
-    can.drawString(217, h - 475, data["dob"])
-    can.drawString(302, h - 475, data["aadhaar"])
-    can.drawString(42,  h - 475, data["pan"])
+    can.drawString(200, h - 241, data["dob"])
+    can.drawString(350, h - 241, data["aadhaar"])
+    can.drawString(50,  h - 241, data["pan"])
 
     can.drawString(80,  h - 518.7, data["mobile"])
     can.drawString(159, h - 530,  data["email"])
     can.drawString(420, h - 578.8, data["employment"])
 
     text = can.beginText()
-    text.setTextOrigin(280, h - 518.7)
+    text.setTextOrigin(300, h - 371)
     for line in data["address"].splitlines():
         text.textLine(line)
     can.drawText(text)

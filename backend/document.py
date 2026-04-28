@@ -111,7 +111,7 @@ def add_document():
     last_exception = None
     for i in range(3):
         try:
-            key_env = os.getenv(f"PERPLEX_API_{i+1}")
+            key_env = os.getenv(f"GEMINI_API_KEY_{i+1}")
             llm = LLM(api_key=key_env)
             llm_data = llm.extract_bill_info(combined_prompt_text)
             print(llm_data)
